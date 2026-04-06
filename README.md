@@ -2,6 +2,8 @@
 # Amazon Best Sellers Data Scraper
 
 **基于 Python 的亚马逊畅销榜数据分析工具**
+### 📂 项目结构
+```text
 iPhone17_Case_Analysis/
 ├── main.py             # 核心分析脚本 (包含数据清洗、统计分析及绘图代码)
 ├── output/             # 可视化报表输出目录 (存放生成的 PNG 图表)
@@ -11,6 +13,7 @@ iPhone17_Case_Analysis/
 ├── data/               # (建议创建) 原始数据存储目录
 │   └── raw_data.csv    # 原始爬取或导入的数据
 └── README.md           # 项目说明文档
+```
 
 
 本项目是一个用于抓取亚马逊（Amazon）特定品类畅销榜（Best Sellers）数据并分析商品详情的 Python 脚本。它专为跨境电商市场分析设计，能够快速获取榜单 ASIN 并多线程抓取商品核心数据（价格、评分、评论数等），最终生成 Excel 报表。
