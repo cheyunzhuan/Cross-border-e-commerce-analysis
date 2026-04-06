@@ -88,7 +88,7 @@ python get_data.py
 ## 这三张图表分别揭示了iPhone 17手机壳市场的价格分布、品牌竞争格局以及头部品牌的价格策略。
 
 ### 价格分布分析：低价走量是主流策略
-
+![价格分布图](https://github.com/cheyunzhuan/Cross-border-e-commerce-analysis/blob/main/plots_clean/1_price_distribution.png)
 - **数据解读**：第一张图（价格分布直方图）显示，绝大多数手机壳的价格集中在 **5 SGD 到 20 SGD** 之间。峰值出现在 **10 SGD - 12 SGD** 左右，随后随着价格升高，产品数量急剧下降。在 30 SGD 以上的高价位区间，产品数量非常稀少。
 - **商业洞察**：
   - **价格敏感度高**：市场呈现明显的“长尾分布”，说明大部分消费者对于手机壳这类配件的价格较为敏感，倾向于购买平价产品。
