@@ -5,14 +5,14 @@
 ### 📂 项目结构
 ```text
 iPhone17_Case_Analysis/
-├── main.py             # 核心分析脚本 (包含数据清洗、统计分析及绘图代码)
+├── get_ASIN.py         #获取ASIN
+├── get_data.py                 
+├── get_data faster.py  # 核心分析脚本 (包含数据清洗、统计分析及绘图代码)
 ├── output/             # 可视化报表输出目录 (存放生成的 PNG 图表)
 │   ├── price_dist.png  # 价格分布直方图
 │   ├── brand_count.png # 品牌数量柱状图
 │   └── boxplot.png     # 品牌价格箱线图
-├── data/               # (建议创建) 原始数据存储目录
-│   └── raw_data.csv    # 原始爬取或导入的数据
-└── README.md           # 项目说明文档
+└── data/               # (建议创建) 原始数据存储目录 
 ```
 
 
