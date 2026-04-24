@@ -77,5 +77,6 @@
 - Reviews successfully collected: 111
 
 ## README Summary
+README 总结
 
-Review analysis was conducted on 95 cleaned reviews from 9 ASINs captured from Amazon review pages. The sample is strongly positive-skewed (83 five-star reviews), with high-frequency positive themes around quality, perfectly, fits, iphone, camera. Negative feedback is concentrated on color, starting, fade, nowhere, near. Across the sample, the most recurring concern clusters are drop_protection, camera_screen, fit_and_grip, magnet_strength. During review crawling, captcha affected 17 of 30 attempted ASINs (56.7%), so the review insight section should be interpreted as a sample-based analysis rather than full-category coverage.
+对从亚马逊评论页面捕获的9个ASIN的95个已清理的评论进行了评论分析。该样本具有强烈的正面向（83条五星评论），围绕质量、完美、适合、苹果手机、相机的高频正面主题。负面反馈集中在颜色、开始、褪色、无处可去、附近。在整个样本中，最常关注的集群是drop_protection、camera_screen、fit_and_grip、magnet_strength。在审查抓取期间，验证码影响了30个尝试的ASIN中的17个（56.7%），因此应将审查见解部分解释为基于样本的分析，而不是全类别覆盖。
