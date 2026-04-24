@@ -4,23 +4,11 @@
 
 ## Project Summary
 
-一个围绕跨境电商运营场景展开的轻量级竞品分析案例，目标是回答 3 个问题：
+围绕跨境电商运营场景展开的轻量级竞品分析案例，目标是回答 3 个问题：
 
 1. iPhone 手机壳类目的主流价格带在哪里；
 2. 当前榜单中的品牌格局是否集中，是否存在新卖家切入空间；
 3. 不同品牌的价格定位有何差异，适合采用什么样的竞争策略。
-
-## Business Scenario
-
-在亚马逊 3C 数码配件类目中，手机壳属于高频上新、竞争激烈、同质化明显的细分市场。对于运营助理或初级运营来说，进入一个新品类时通常需要先完成：
-
-- 榜单竞品抓取；
-- 基础字段清洗；
-- 价格带分析；
-- 品牌分布观察；
-- 初步定价和差异化方向判断。
-
-本项目即围绕这一实际工作流展开，模拟“新品前期市场调研”的过程。
 
 ## Data Pipeline
 
@@ -52,6 +40,15 @@
 - 生成价格分布、品牌数量、品牌价格定位等图表；
 - 输出适合竞品调研使用的清洗后结果。
 
+### 4. 评论样本清洗与文本分析
+
+脚本：`review_analysis.py`
+
+- 读取评论原始数据 `asin_reviews_raw.csv` 与抓取状态表 `asin_review_crawl_status.csv`；
+- 清洗编码异常、过滤乱码/非英文评论、提取星级数值与评论长度；
+- 输出评论基础统计、星级分布、正负向高频词、痛点归类和 README 可复用摘要；
+- 将评论分析与抓取覆盖率放在同一套叙述里，使项目更像真实数据采集与分析流程，而不是只挑少量评论做主观总结。
+
 ## Repository Structure
 
 ```text
@@ -60,6 +57,7 @@ Cross-border-e-commerce-analysis/
 ├── get_data.py
 ├── get_data faster.py
 ├── analyze_data.py
+├── review_analysis.py
 ├── plots_clean/
 │   ├── 1_price_distribution.png
 │   ├── 2_top_brands.png
@@ -170,6 +168,26 @@ Cross-border-e-commerce-analysis/
 - 关键词整理与页面埋词能力；
 - Listing 优化和运营表达能力。
 
+## Review Data Coverage
+
+除榜单与详情页数据外，项目还引入了评论页样本分析。评论原始数据来自 `asin_reviews_raw.csv`，抓取状态记录在 `asin_review_crawl_status.csv`。
+
+当前评论分析链路包含：
+
+- 评论原始数据抓取；
+- 评论编码清洗与异常文本过滤；
+- 星级、长度、词频和痛点分类分析；
+- 与抓取状态表联动，评估评论覆盖率和 captcha 影响。
+
+当前样本特点如下：
+
+- 清洗后保留评论 95 条；
+- 覆盖 9 个成功抓取到评论文本的 ASIN；
+- 原始尝试抓取 30 个 ASIN 的评论页；
+- 其中 17 个 ASIN 在抓取过程中受到 captcha 影响，captcha 占比约 56.7%。
+
+因此，评论洞察部分更适合作为 **sample-based insight extraction**，用于提炼高频卖点和主要负向反馈，而不是把它表述为整个类目的完整评论普查。把抓取状态一并保留下来，也能更真实地反映 Amazon 评论抓取过程中受到反爬限制的情况。
+
 ## Business Insights
 
 基于当前样本，本项目得到以下几条可用于运营决策的初步结论：
@@ -191,9 +209,16 @@ Cross-border-e-commerce-analysis/
 为了保持项目轻量可复现，当前版本也有几个边界：
 
 - 数据样本主要来自榜单页和商品详情页，不包含更深层的广告、销量或转化数据；
+- 评论数据受 Amazon captcha 影响较明显，当前评论分析仅覆盖部分成功抓取的 ASIN；
 - 类目分析偏向静态截面，不是长期连续监控；
 - 目前更适合做竞品研究与选品初筛，不适合作为完整经营分析结论。
 
+后续如果继续完善，可以补充：
+
+- 更多类目和更多时间维度的数据；
+- 评论文本和卖点词频分析；
+- 关键词聚类与 Listing 卖点对比；
+- 更完整的 Dashboard 展示。
 
 ## How to Run
 
@@ -228,11 +253,12 @@ python "get_data faster.py"
 
 ```bash
 python analyze_data.py
+python review_analysis.py
 ```
 
-## Value
+## Resume-Oriented Value
 
-总结
+如果用于求职展示，这个项目能够体现以下能力：
 
 - 能从运营问题出发拆解分析目标，而不只是写脚本；
 - 能完成基础数据抓取、清洗、可视化和竞品分析；
