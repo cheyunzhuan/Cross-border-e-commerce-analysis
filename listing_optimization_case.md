@@ -44,13 +44,13 @@ This phone case is suitable for iPhone 16 Pro. It has a clear design and offers 
 
 ---
 
-## After Optimization
+## 优化后
 
 ### Optimized Title
 
 iPhone 16 Pro Case, Magnetic Clear Case for MagSafe, Shockproof Slim Phone Cover with Anti-Yellowing Back, Raised Camera Protection, Scratch Resistant Transparent Case for iPhone 16 Pro 6.3 Inch
 
-### Optimized Bullet Points
+### 优化的要点
 
 1. **Strong Magnetic for MagSafe**  
 Built-in magnetic ring aligns securely with MagSafe chargers, wallets and car mounts for stable daily use.
@@ -67,17 +67,17 @@ Lightweight profile keeps your phone easy to hold and pocket-friendly without ad
 5. **Precise Cutouts and Scratch Resistance**  
 Responsive buttons, accurate cutouts and a durable back panel support smooth daily use and better long-term durability.
 
-### Optimized Description
+### 描述的优化
 
 Protect your iPhone 16 Pro without hiding its original look. This magnetic clear case is designed for MagSafe accessories and daily drop protection. With a transparent anti-yellowing back, slim profile, reinforced corners and raised camera edges, it is ideal for commuting, office use and everyday carry. A practical choice for users who want clean style, reliable protection and convenient wireless charging.
 
-### Suggested Search Terms
+### 搜索词的建议
 
 iphone 16 pro case magsafe clear shockproof slim transparent anti yellowing magnetic phone cover camera protection scratch resistant
 
 ---
 
-## Keyword Placement Comparison
+## 关键词位置比较
 
 | Keyword | Before | After | Placement |
 | --- | --- | --- | --- |
@@ -92,7 +92,7 @@ iphone 16 pro case magsafe clear shockproof slim transparent anti yellowing magn
 
 ---
 
-## Optimization Logic
+## 优化逻辑
 
 ### 1. Title Logic
 
@@ -110,7 +110,7 @@ iphone 16 pro case magsafe clear shockproof slim transparent anti yellowing magn
 - 是否透明；
 - 是否具备防摔和抗黄变能力。
 
-### 2. Bullet Logic
+### 2. Bullet 逻辑
 
 Bullet 顺序按照用户决策优先级排序：
 
@@ -120,13 +120,13 @@ Bullet 顺序按照用户决策优先级排序：
 4. 手感会不会太厚重；
 5. 做工和耐用性如何。
 
-### 3. Description Logic
+### 3. Description逻辑
 
 Description 不重复堆砌关键词，而是补充使用场景和整体购买感受，让页面更完整。
 
 ---
 
-## Expected Improvement
+## 改进部分
 
 从运营角度看，优化后的 Listing 主要改善了 3 个方面：
 
