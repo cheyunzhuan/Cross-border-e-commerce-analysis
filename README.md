@@ -130,8 +130,6 @@ Cross-border-e-commerce-analysis/
 
 ## Supporting Files
 
-为了让项目更贴近真实跨境电商运营场景，除基础爬取与图表分析外，我进一步补充了评论洞察、关键词整理和 Listing 优化案例。这些文件不直接堆进 README，而是作为独立交付物保留，便于在面试或作品展示时按需展开。
-
 ### 1. Review Insights
 
 文件：`review_insights.md`
@@ -164,7 +162,7 @@ Cross-border-e-commerce-analysis/
 
 ### Deliverable Value
 
-这 3 个补充文件与主项目共同构成了一个更完整的跨境电商运营分析作品集，能够同时体现：
+这 3 个补充文件与主项目共同构成了一个更完整的跨境电商运营分析，能够同时体现：
 
 - 数据抓取与清洗能力；
 - 竞品分析与图表解读能力；
