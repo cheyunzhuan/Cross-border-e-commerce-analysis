@@ -230,9 +230,9 @@ python "get_data faster.py"
 python analyze_data.py
 ```
 
-## Resume-Oriented Value
+## Value
 
-如果用于求职展示，这个项目能够体现以下能力：
+总结
 
 - 能从运营问题出发拆解分析目标，而不只是写脚本；
 - 能完成基础数据抓取、清洗、可视化和竞品分析；
