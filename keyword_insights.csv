@@ -1,0 +1,32 @@
+Keyword,Category,Intent,Priority,Recommended Placement,Notes
+iphone 16 pro case,核心词,明确购买机型手机壳,High,Title; Bullet; Search Terms,必须覆盖的主词
+iphone 16 pro max case,核心词,明确购买机型手机壳,Medium,Search Terms,按产品是否适配决定
+iphone case,大词,泛类目流量,Low,Search Terms,流量大但不精准
+iphone 15 pro case,核心词,旧机型延展需求,Medium,Search Terms,适合多机型变体
+magsafe case,功能词,寻找磁吸功能,High,Title; Bullet 1; Search Terms,高转化功能词
+iphone 16 pro magsafe case,功能长尾词,机型+功能双明确,High,Title; Bullet 1,优先投放 Exact
+magnetic phone case,功能词,磁吸/磁性支架需求,Medium,Bullet 1; Search Terms,可做补充词
+clear phone case,功能词,透明壳需求,High,Title; Bullet 2,透明壳核心流量词
+clear magsafe case,功能长尾词,透明+磁吸组合需求,High,Bullet 2; Search Terms,适合广告放量
+shockproof phone case,功能词,防摔需求,High,Bullet 3; Search Terms,防摔类目核心词
+drop protection case,功能词,保护性需求,Medium,Bullet 3; A+ Page,适合副图强化
+anti yellowing case,痛点词,透明壳抗黄变需求,High,Bullet 2; A+ Page; Search Terms,建议重点布局
+slim phone case,体验词,轻薄握持需求,Medium,Bullet 4; Search Terms,降低厚重顾虑
+thin protective case,体验长尾词,兼顾轻薄与保护,Medium,Bullet 4,适合中端定位
+camera protection case,功能词,镜头保护需求,Medium,Bullet 3; A+ Page,辅助转化词
+raised edge phone case,功能词,屏幕边缘保护,Medium,Bullet 3; Search Terms,辅助保护表达
+scratch resistant case,功能词,防刮耐用需求,Medium,Bullet 5; Search Terms,常见补充卖点
+anti fingerprint case,痛点词,防指纹需求,Medium,Bullet 5,适合哑光或磨砂壳
+matte phone case,材质词,哑光手感需求,Low,Search Terms,仅适用于哑光产品
+silicone phone case,材质词,硅胶材质需求,Low,Search Terms,非硅胶产品不主投
+phone case with screen protector,套装词,想要套装解决方案,Medium,Title; Bullet,仅适用于套装款
+phone case with camera protector,套装词,镜头保护套装需求,Medium,Bullet; Search Terms,仅适用于含镜头膜产品
+case for daily use,场景词,日常通勤使用,Low,Description; A+ Page,适合生活场景化表达
+business phone case,场景词,商务简洁风格需求,Low,Description,适合轻薄哑光类
+gift for iphone users,场景词,礼品场景,Low,A+ Page,适合多色或套装款
+wireless charging case,功能词,无线充兼容需求,Medium,Bullet 1; Search Terms,与 MagSafe 场景相关
+car mount compatible case,场景词,车载支架场景,Medium,Bullet 1; A+ Page,磁吸壳可重点展示
+bulky case,否定关注词,担心厚重,Observation,N/A,用于评论和竞品观察
+yellowing clear case,否定关注词,担心黄变,Observation,N/A,用于痛点分析
+weak magnet case,否定关注词,担心磁吸不稳,Observation,N/A,用于评论和广告否词参考
+
