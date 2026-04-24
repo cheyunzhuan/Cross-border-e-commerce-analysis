@@ -1,147 +1,209 @@
+# Cross-border E-commerce Analysis
 
-# Amazon Best Sellers Data Scraper
+基于 Python 的亚马逊手机壳榜单抓取与竞品分析项目，面向跨境电商选品、定价和竞品研究场景。项目以 Amazon Best Sellers 榜单为入口，抓取商品 ASIN、标题、价格、评分、评论数等信息，对 iPhone 手机壳细分类目进行数据清洗、可视化分析和初步商业判断，为新品切入和 Listing 优化提供参考。
 
-**基于 Python 的亚马逊畅销榜数据分析工具**
-### 📂 项目结构
+## Project Summary
+
+围绕跨境电商运营场景展开的轻量级竞品分析案例，目标是回答 3 个问题：
+
+1. iPhone 手机壳类目的主流价格带在哪里；
+2. 当前榜单中的品牌格局是否集中，是否存在新卖家切入空间；
+3. 不同品牌的价格定位有何差异，适合采用什么样的竞争策略。
+
+## Business Scenario
+
+在亚马逊 3C 数码配件类目中，手机壳属于高频上新、竞争激烈、同质化明显的细分市场。对于运营助理或初级运营来说，进入一个新品类时通常需要先完成：
+
+- 榜单竞品抓取；
+- 基础字段清洗；
+- 价格带分析；
+- 品牌分布观察；
+- 初步定价和差异化方向判断。
+
+本项目即围绕这一实际工作流展开，模拟“新品前期市场调研”的过程。
+
+## Data Pipeline
+
+项目目前包含 3 个核心步骤：
+
+### 1. 榜单 ASIN 提取
+
+脚本：`get_ASIN.py`
+
+- 抓取 Amazon Best Sellers 页面；
+- 解析榜单商品链接；
+- 提取 ASIN，作为后续详情抓取入口。
+
+### 2. 商品详情抓取
+
+脚本：`get_data.py` / `get_data faster.py`
+
+- 按 ASIN 访问商品详情页；
+- 提取 `Title`、`Price`、`Rating`、`Reviews`、`URL` 等字段；
+- 使用 `ThreadPoolExecutor` 做并发抓取；
+- 通过重试、随机延时、代理等方式降低请求失败率。
+
+### 3. 数据清洗与分析
+
+脚本：`analyze_data.py`
+
+- 清洗价格字段并转换为可分析数值；
+- 过滤 iPhone 目标机型相关商品；
+- 生成价格分布、品牌数量、品牌价格定位等图表；
+- 输出适合竞品调研使用的清洗后结果。
+
+## Repository Structure
+
 ```text
-iPhone17_Case_Analysis/
-├── get_ASIN.py         #获取ASIN
-├── get_data.py                 
-├── get_data faster.py  # 核心分析脚本 (包含数据清洗、统计分析及绘图代码)
-├── output/             # 可视化报表输出目录 (存放生成的 PNG 图表)
-│   ├── price_dist.png  # 价格分布直方图
-│   ├── brand_count.png # 品牌数量柱状图
-│   └── boxplot.png     # 品牌价格箱线图
-└── data/               # (建议创建) 原始数据存储目录 
+Cross-border-e-commerce-analysis/
+├── get_ASIN.py
+├── get_data.py
+├── get_data faster.py
+├── analyze_data.py
+├── plots_clean/
+│   ├── 1_price_distribution.png
+│   ├── 2_top_brands.png
+│   └── 3_price_by_brand.png
+└── README.md
 ```
 
+## Tech Stack
 
-本项目是一个用于抓取亚马逊（Amazon）特定品类畅销榜（Best Sellers）数据并分析商品详情的 Python 脚本。它专为跨境电商市场分析设计，能够快速获取榜单 ASIN 并多线程抓取商品核心数据（价格、评分、评论数等），最终生成 Excel 报表。
+- Python
+- Requests
+- BeautifulSoup4
+- Pandas
+- Matplotlib
+- Seaborn
+- concurrent.futures
 
----
+## Key Analysis Outputs
 
-## 核心功能
+### 1. Price Distribution
 
-- **榜单 ASIN 提取**：自动解析亚马逊 Best Sellers 页面，提取 Top 50 商品 ASIN。
-- **多线程并发抓取**：采用 `ThreadPoolExecutor` 实现多线程并发，大幅提升数据抓取速度（相比串行抓取提升 5-10 倍）。
-- **反爬虫对抗**：
-    - 内置动态 User-Agent 池。
-    - 支持本地代理（如 Shadowrocket/Clash），防止 IP 被封。
-    - 智能重试机制与随机延时策略。
-- **数据清洗与导出**：自动清洗价格、评分等字段，最终生成结构化的 Excel 文件。
+![Price Distribution](https://github.com/cheyunzhuan/Cross-border-e-commerce-analysis/blob/main/plots_clean/1_price_distribution.png)
 
----
+观察结果：
 
-## 环境依赖
+- 榜单商品价格呈明显右偏分布；
+- 主流价格集中在较低价格带；
+- 大部分样本落在 `5 - 20 SGD` 区间；
+- 高价产品数量明显减少，属于长尾高溢价市场。
 
-请确保已安装 Python 3.x，并安装以下依赖库：
+业务解读：
+
+- 如果目标是新品冷启动和快速出单，低中价位是更稳妥的切入区间；
+- 高价策略并非不能做，但需要更强的品牌背书、材质卖点或防护能力支撑。
+
+### 2. Brand Distribution
+
+![Top Brands](https://github.com/cheyunzhuan/Cross-border-e-commerce-analysis/blob/main/plots_clean/2_top_brands.png)
+
+观察结果：
+
+- 榜单头部品牌数量优势并不明显；
+- Top 10 品牌之间铺货数量差距有限；
+- 市场呈现出较强的碎片化特征。
+
+业务解读：
+
+- 说明该细分市场并非被极少数品牌绝对垄断；
+- 对新卖家来说，仍存在通过差异化卖点和页面优化切入的空间；
+- 竞争重点更可能在 Listing 承接、定价、Review 积累和广告效率，而不是品牌垄断本身。
+
+### 3. Price Positioning by Brand
+
+![Price by Brand](https://github.com/cheyunzhuan/Cross-border-e-commerce-analysis/blob/main/plots_clean/3_price_by_brand.png)
+
+观察结果：
+
+- 不同品牌存在明显的价格梯队；
+- 低价品牌集中在入门级区间；
+- 中端品牌价格更稳定；
+- 高端品牌具有更明显的溢价能力。
+
+业务解读：
+
+- 低价路线适合竞争激烈、以走量为主的策略；
+- 中端路线需要清晰卖点支撑，如磁吸、防摔、抗黄变、镜头保护等；
+- 高端路线更适合已有品牌认知或强功能心智的产品。
+
+## Business Insights
+
+基于当前样本，本项目得到以下几条可用于运营决策的初步结论：
+
+1. **定价建议**  
+   新品如果缺乏品牌心智，优先考虑主流价格带切入，先验证点击率和转化，再决定是否做高客单价路线。
+
+2. **竞争判断**  
+   当前榜单的品牌集中度有限，市场并非完全固化，新卖家仍可通过差异化定位争取机会。
+
+3. **页面优化方向**  
+   对于 iPhone 手机壳类目，页面重点通常应围绕磁吸、防摔、抗黄变、轻薄手感、镜头保护等核心卖点展开。
+
+4. **适用场景**  
+   该分析方法可复用于其他 3C 配件子类目，如钢化膜、支架壳、磁吸配件、车载配件等。
+
+## Limitations
+
+为了保持项目轻量可复现，当前版本也有几个边界：
+
+- 数据样本主要来自榜单页和商品详情页，不包含更深层的广告、销量或转化数据；
+- 类目分析偏向静态截面，不是长期连续监控；
+- 目前更适合做竞品研究与选品初筛，不适合作为完整经营分析结论。
+
+后续如果继续完善，可以补充：
+
+- 更多类目和更多时间维度的数据；
+- 评论文本和卖点词频分析；
+- 关键词聚类与 Listing 卖点对比；
+- 更完整的 Dashboard 展示。
+
+## How to Run
+
+### 1. Install dependencies
 
 ```bash
-pip install requests beautifulsoup4 pandas fake-useragent openpyxl
+pip install requests beautifulsoup4 pandas matplotlib seaborn fake-useragent openpyxl
 ```
 
----
+### 2. Configure target URL and proxy
 
-## 快速开始
+根据自己的环境修改脚本中的：
 
-### 1. 配置代理（重要）
+- `TARGET_URL`
+- `SAVE_DIR`
+- `PROXIES`
 
-亚马逊对爬虫限制严格，建议开启本地代理工具（如小火箭、Clash）。
-
-1. 打开代理软件设置。
-2. 开启 **“允许来自局域网的连接”**。
-3. 记下端口号（通常为 `1082` 或 `7890`）。
-
-### 2. 修改配置
-
-在代码的 `配置区域` 中修改以下内容：
-
-- `SAVE_DIR`：你的文件保存路径。
-- `TARGET_URL`：你想抓取的亚马逊榜单链接。
-- `PROXIES`：填入你的本地代理地址。
-
-### 3. 运行脚本
+### 3. Run scraper
 
 ```bash
+python get_ASIN.py
 python get_data.py
 ```
 
-运行成功后，你将在指定目录下看到生成的 `iphone_cases_top50_fast.xlsx` 文件。
+如需更快抓取，可运行：
 
----
+```bash
+python "get_data faster.py"
+```
 
-## 常见问题
+### 4. Run analysis
 
-### 获取失败，状态码：503
+```bash
+python analyze_data.py
+```
 
-- **原因**：IP 被亚马逊暂时封禁。
-- **解决**：检查代理是否开启，或更换代理节点。
+## Resume-Oriented Value
 
-### 发现 0 个带有 data-asin 的元素
+如果用于求职展示，这个项目能够体现以下能力：
 
-- **原因**：亚马逊页面结构更新或反爬拦截。
-- **解决**：程序会自动保存 `debug_amazon.html`，请打开该文件检查是否为验证码页面。
+- 能从运营问题出发拆解分析目标，而不只是写脚本；
+- 能完成基础数据抓取、清洗、可视化和竞品分析；
+- 能把分析结果转化为定价、定位和 Listing 优化方向；
+- 具备跨境电商运营助理常见的“数据支持 + 竞品研究”能力基础。
 
-### 程序运行报错 `NameError: name 'random' is not defined`
+## Disclaimer
 
-- **解决**：请确保代码顶部已包含 `import random`。
+本项目仅用于学习、研究与个人作品展示，请勿用于高频、商业化或违反平台规则的数据抓取行为。实际使用时请遵守 Amazon 的平台政策及相关法律法规。
 
----
-
-## 免责声明
-
-本项目仅供学习和技术交流使用。请勿用于商业用途或高频恶意抓取。抓取数据请遵守亚马逊的 `robots.txt` 协议及相关法律法规。
-
----
-
-## 更新日志
-
-- **v1.1**：引入多线程抓取，优化速度；修复 ASIN 解析逻辑。
-- **v1.0**：初始版本，实现基础串行抓取。
-
----
-## 这三张图表清晰地展示了 iPhone 17 手机壳市场的数据分布、品牌格局和价格定位。
-
-### 价格分布分析：典型右偏分布与低价策略主导
-![价格分布图](https://github.com/cheyunzhuan/Cross-border-e-commerce-analysis/blob/main/plots_clean/1_price_distribution.png)
-#### 数据特征
-- **分布形态**：第一张图（Price Distribution）呈现出明显的**右偏分布**。绝大多数产品的价格集中在左侧的低价格区间。
-- **集中趋势**：数据的峰值出现在 **10 SGD - 12 SGD** 之间。这意味着市场上最主流、最常见的定价策略是定在这个区间。
-- **离散程度**：大部分产品（约 80%）的价格都在 **5 SGD 到 20 SGD** 之间。超过 25 SGD 的产品数量急剧减少，呈现长尾效应。
-
-#### 统计与商业洞察
-- **众数**：10-12 SGD 是该数据集的众数区间，代表市场的主流接受度。
-- **市场定位**：这是一个高度价格敏感的市场。商家普遍采用**低价渗透策略**来争夺市场份额，高价位产品（>30 SGD）属于极小众的利基市场。
-
-### 品牌竞争格局：极度碎片化，头部效应微弱
-![品牌竞争格图](https://github.com/cheyunzhuan/Cross-border-e-commerce-analysis/blob/main/plots_clean/2_top_brands.png)
-#### 数据特征
-- **数量级**：第二张图（Top 10 Brands）显示，排名前列的品牌产品数量极少。即便是排名第一和第二的品牌（Miracase 和 FNTCASE），也仅拥有 2 款相关产品。
-- **长尾效应**：从第 3 名到第 10 名，所有品牌的产品数量均为 1 款。这表明在 Top 10 的范围内，并没有出现垄断性的“超级品牌”。
-
-#### 统计与商业洞察
-- **赫芬达尔指数推测**：虽然无法计算具体数值，但从柱状图的高度一致性来看，该市场的集中度极低，竞争格局非常分散。
-- **市场机会**：对于新进入者来说，壁垒较低。目前的 Top 品牌并没有通过“机海战术”（大量铺货）来占据榜单，说明在这个细分领域（iPhone 17 早期），大家处于同一起跑线。
-
-### 品牌价格定位分析：明显的层级分化
-
-#### 数据特征
-![品牌价格定位图](https://github.com/cheyunzhuan/Cross-border-e-commerce-analysis/blob/main/plots_clean/3_price_by_brand.png)
-- **箱线图解读**：第三张图（Price Variance by Top 5 Brands）展示了不同品牌的价格离散度和中位数。
-    - **SUPFINE**：价格极低且无波动（箱体极扁），维持在 5-6 SGD 左右，走极致性价比路线。
-    - **FNTCASE**：价格集中在 6-9 SGD，略高于 SUPFINE，但依然属于低价区。
-    - **Miracase**：价格中位数在 17-18 SGD 左右，箱体较短，说明定价策略稳定，属于中端定位。
-    - **Spigen**：价格固定在 19 SGD 左右（表现为一条线），说明该样本中其产品定价单一且精准。
-    - **OtterBox**：价格极高，稳定在 45 SGD 左右，与其他品牌形成了断层式的差距。
-
-#### 统计与商业洞察
-- **价格分层**：市场存在明显的**价格梯队**。
-    - **第一梯队（入门级）**：SUPFINE, FNTCASE (<10 SGD)
-    - **第二梯队（进阶级）**：Miracase (~17 SGD)
-    - **第三梯队（专业/高端级）**：Spigen (~19 SGD), OtterBox (45 SGD)
-- **品牌溢价**：OtterBox 的箱体位置极高，说明其品牌溢价能力极强，消费者愿意为其品牌（通常代表防摔保护性能）支付 2-3 倍于普通品牌的溢价。
-
-### 总结建议
-- **定价策略**：如果目标是走量，**10-12 SGD** 是最安全的定价区间。
-- **竞争策略**：由于市场极度分散，不必过分担心头部品牌的垄断。
-- **差异化**：如果想避开低价内卷，可以参考 Miracase 或 Spigen 的中端定价（17-20 SGD），但这需要产品具备相应的品牌力或功能卖点来支撑溢价。
